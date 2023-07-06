@@ -1,6 +1,6 @@
 # Awesome .NET 7 Web Application with DataTables Features 🌐✨
 
-Welcome to the Awesome .NET 7 Web Application! This project is a feature-rich web application built using .NET 7 framework. It incorporates powerful DataTables functionality for custom filtering, paging, sorting, and exporting data as Excel sheets. With additional features like CRUD operations, user authentication, role-based authorization, and a stunning UI, this application was built when I was learning .NET and implementing what I have learnt during my Training period. Let's dive in! 💪🚀
+Welcome to the Awesome .NET 7 Web Application! This project is a feature-rich web application built using .NET 7 framework. It incorporates powerful DataTables functionality for custom filtering, paging, sorting, and exporting data as Excel sheets. With additional features like CRUD operations, user authentication, role-based authorization, and a stunning UI, this application was built when I was learning .NET and implementing what I have learnt during my Training period. So,let's dive in! 💪🚀
 
 # Features
 
