@@ -1,0 +1,111 @@
+﻿@model IEnumerable<DTWebApp.Models.TransactionModel>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Transactions List</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <p>
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Transaction",null,Context.Request.Scheme)', 'New Transaction' )" class="btn btn-success text-white"><i class="fas fa-random"></i> New Transaction</a>
+                    <button id="filterButton" class="btn btn-primary" data-toggle="modal" data-target="#filterModal"><i class="fa fa-filter" aria-hidden="true"></i></button>
+                    <button id="excelButton" class="btn btn-dark" onclick="downloadExcel()"><i class="fa fa-download" aria-hidden="true"></i></button>
+                </p>
+            </div>
+        </div>
+      
+
+
+        <!-- Filter Modal -->
+        <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="filterModalLabel">Filter Transactions</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="filterColumn">Filter Column:</label>
+                            <select id="filterColumn" class="form-control">
+                                <option value="beneficiaryName">Beneficiary Name</option>
+                                <option value="amount">Amount</option>
+                                <option value="accountNumber">Account Number</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filterInput">Search:</label>
+                            <input type="text" id="filterInput" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="applyFilterButton" class="btn btn-primary" onclick="applyFilterAndCloseModal()">Apply Filter</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+       
+        <table id="example1" class="table table-bordered table-striped">
+      
+        <thead class="thead-light">
+            <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AccountNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BeneficiaryName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BeneficiaryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        <div>
+                            <a onclick="showInPopup('@Url.Action("AddOrEdit","Transaction",new {id=item.TransactionId},Context.Request.Scheme)','Update Transaction')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i></a>
+                            <form asp-action="Delete" asp-route-id="@item.TransactionId" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                                <input type="hidden" asp-for="@item.TransactionId" />
+                                    <button type="submit" class="btn btn-danger" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                   
+                                    
+                            </form>
+                        </div> 
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        
+</div>
+</div>
